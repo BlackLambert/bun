@@ -3,13 +3,43 @@
  */
 package com.sbaier.bun
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello world."
-        }
+class App (private val burgerAssembler: BurgerAssembler)
+{
+    fun createDemoBurgers()
+    {
+        // Default Burger
+        println(burgerAssembler.createBurger().assemble().toString())
+
+        // Veggie Burger
+        println(burgerAssembler.createBurger().withWholeGrainBun().withVeggiePatty().single().withoutSauce().
+                withCheddar().andAdd(BurgerIngredient.Salad, BurgerIngredient.Tomatoes).assemble().toString())
+
+        // Triple Beef and Bacon Burger
+        println(burgerAssembler.createBurger().withClassicBun().withBeefPatty().medium().triple().usingSpecialSauce().
+                withoutCheese().andAdd(BurgerIngredient.Salad, BurgerIngredient.Tomatoes, BurgerIngredient.Bacon).
+                assemble().toString())
+
+        // Hot Crispy Chicken Burger
+        println(burgerAssembler.createBurger().withSesameBun().withCrispyChicken().single().usingChiliSauce().
+                withoutCheese().andAdd(BurgerIngredient.Peperoni).assemble().toString())
+
+        // Breakfast Burger
+        println(burgerAssembler.createBurger().withWholeGrainBun().withBeefPatty().mediumWell().single().
+                withoutSauce().withMozzarella().andAdd(BurgerIngredient.RoastedOnions, BurgerIngredient.Bacon,
+                BurgerIngredient.Egg).assemble().toString())
+
+        // Classic Cheese Burger
+        println(burgerAssembler.createBurger().withClassicBun().withBeefPatty().medium().single().
+                usingCocktailSauce().withCheddar().andAdd(BurgerIngredient.Pickles, BurgerIngredient.FreshOnions).
+                assemble().toString())
+
+        // Deluxe Burger
+        println(burgerAssembler.createBurger().withSesameBun().withBeefPatty().bloody().double().
+                usingSpecialSauce().withGouda().andAdd(BurgerIngredient.Salad, BurgerIngredient.Tomatoes,
+                BurgerIngredient.FreshOnions, BurgerIngredient.Bacon).assemble().toString())
+    }
 }
 
 fun main(args: Array<String>) {
-    println(App().greeting)
+    App(BurgerAssembler()).createDemoBurgers()
 }
